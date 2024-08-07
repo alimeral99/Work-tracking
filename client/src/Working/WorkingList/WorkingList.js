@@ -32,15 +32,14 @@ function WorkingList() {
 
   const rows = works.map((work) => createData(work.name, work.duration));
 
-  console.log(works);
   return (
-    <div>
+    <div className="workingList">
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell style={{ fontWeight: "600" }}>Works</TableCell>
-              <TableCell style={{ fontWeight: "600" }} align="right">
+              <TableCell style={{ fontWeight: 600 }}>Works</TableCell>
+              <TableCell style={{ fontWeight: 600 }} align="right">
                 Durations
               </TableCell>
             </TableRow>
@@ -51,10 +50,10 @@ function WorkingList() {
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {row.works}
+                <TableCell style={{ color: "grey" }}>{row.works}</TableCell>
+                <TableCell style={{ color: "grey" }} align="right">
+                  {row.durations}
                 </TableCell>
-                <TableCell align="right">{row.durations}</TableCell>
               </TableRow>
             ))}
           </TableBody>
