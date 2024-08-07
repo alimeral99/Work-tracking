@@ -11,7 +11,7 @@ const addWorking = async (req, res, next) => {
   try {
     await newWorks.save();
 
-    res.status(201).json(newWorkout);
+    res.status(201).json(newWorks);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
@@ -31,4 +31,3 @@ module.exports = {
   addWorking,
   getWorking,
 };
-/////dffdsfdsf
