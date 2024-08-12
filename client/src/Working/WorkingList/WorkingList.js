@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 
 import axios from "axios";
 
-function createData(works, durations) {
+function createData(works, durations, id) {
   return { works, durations };
 }
 
@@ -30,7 +30,9 @@ function WorkingList() {
     }
   };
 
-  const rows = works.map((work) => createData(work.name, work.duration));
+  const rows = works.map((work) =>
+    createData(work.name, work.duration, work._id)
+  );
 
   return (
     <div className="workingList">
@@ -45,13 +47,15 @@ function WorkingList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map((row, id) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell style={{ color: "grey" }}>{row.works}</TableCell>
-                <TableCell style={{ color: "grey" }} align="right">
+                <TableCell key={id} style={{ color: "grey" }}>
+                  {row.works}
+                </TableCell>
+                <TableCell key={id} style={{ color: "grey" }} align="right">
                   {row.durations}
                 </TableCell>
               </TableRow>

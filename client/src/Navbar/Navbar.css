@@ -1,0 +1,12 @@
+.navbar {
+  height: 60px;
+  padding: 10px;
+  background-color: #ffffff;
+  color: gray;
+  border-bottom: 1px solid lightgray;
+}
+
+.navbar-logo {
+  text-transform: uppercase;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
