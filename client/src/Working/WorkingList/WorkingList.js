@@ -23,7 +23,7 @@ function WorkingList() {
 
   const getWorks = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/working/get");
+      const { data } = await axios.get("http://localhost:4000/working/works");
       setWorks(data);
     } catch (error) {
       console.error(error);

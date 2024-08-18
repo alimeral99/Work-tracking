@@ -5,6 +5,8 @@ require("dotenv").config();
 
 var corsOptions = {
   origin: "http://localhost:3000",
+  credentials: true,
+  methods: "PATCH,DELETE,POST,GET",
 };
 
 const app = express();
@@ -16,6 +18,7 @@ const workingRouter = require("./routes/working");
 app.get("", (req, res) => {
   res.send("API is running...");
 });
+
 app.use("/working", workingRouter);
 
 mongoose
