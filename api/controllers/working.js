@@ -1,21 +1,16 @@
 const Works = require("../models/works");
 
-const addWorking = async (req, res, next) => {
-  const { date, name, durations } = req.body;
+const createWorking = async (req, res, next) => {
+  const { date, name, duration } = req.body;
 
-  console.log(date, name, durations);
+  const newWorks = new Works({ date, name, duration });
 
-  const newWorks = new Works({
-    date,
-    name,
-    durations,
-  });
-
+  console.log(newWorks);
   try {
     await newWorks.save();
     res.status(201).json("success");
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -30,6 +25,6 @@ const getWorking = async (req, res, next) => {
 };
 
 module.exports = {
-  addWorking,
   getWorking,
+  createWorking,
 };

@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { addWorking, getWorking } = require("../controllers/working");
+const { getWorking, createWorking } = require("../controllers/working");
 
 router.get("/works", getWorking);
 
-router.post("/addworks", addWorking);
+router.post("/addWorks", createWorking);
 
 module.exports = router;

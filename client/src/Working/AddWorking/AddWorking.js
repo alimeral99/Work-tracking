@@ -12,17 +12,15 @@ function AddWorking() {
   const addWorks = async (e) => {
     e.preventDefault();
 
-    const workInfo = new FormData();
-    workInfo.set("date", date);
-    workInfo.set("name", name);
-    workInfo.set("durations", durations);
+    console.log(API_URL);
 
     try {
-      const { data } = await axios.post(`${API_URL}/api/addworks`, workInfo, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const res = await axios.post(`${API_URL}/api/addworks`, {
+        date: date,
+        name: name,
+        duration: durations,
       });
+      console.log(res);
     } catch (error) {
       console.error(error);
     }
