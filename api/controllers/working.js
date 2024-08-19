@@ -1,25 +1,27 @@
-const Working = require("../models/working");
+const Works = require("../models/works");
 
 const addWorking = async (req, res, next) => {
-  const { name, duration, date } = req.body;
+  const { date, name, durations } = req.body;
 
-  const newWorks = new Working({
-    name,
-    duration,
+  console.log(date, name, durations);
+
+  const newWorks = new Works({
     date,
+    name,
+    durations,
   });
+
   try {
     await newWorks.save();
-
-    res.status(201).json(newWorks);
+    res.status(201).json("success");
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
 const getWorking = async (req, res, next) => {
   try {
-    const works = await Working.find();
+    const works = await Works.find();
 
     res.status(200).json(works);
   } catch (error) {

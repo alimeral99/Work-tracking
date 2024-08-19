@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./WorkingList.css";
+import API_URL from "../../api";
 
+import axios from "axios";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,8 +10,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
-import axios from "axios";
 
 function createData(works, durations, id) {
   return { works, durations };
@@ -23,7 +23,7 @@ function WorkingList() {
 
   const getWorks = async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/working/works");
+      const { data } = await axios.get(`${API_URL}/api/works`);
       setWorks(data);
     } catch (error) {
       console.error(error);

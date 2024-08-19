@@ -5,6 +5,6 @@ const { addWorking, getWorking } = require("../controllers/working");
 
 router.get("/works", getWorking);
 
-router.post("/add", addWorking);
+router.post("/addworks", addWorking);
 
 module.exports = router;

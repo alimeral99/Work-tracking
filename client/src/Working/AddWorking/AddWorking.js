@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./AddWorking.css";
+import API_URL from "../../api";
 
 import axios from "axios";
 
@@ -17,11 +18,11 @@ function AddWorking() {
     workInfo.set("durations", durations);
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/working/add",
-        workInfo
-      );
-      console.log(response);
+      const { data } = await axios.post(`${API_URL}/api/addworks`, workInfo, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } catch (error) {
       console.error(error);
     }

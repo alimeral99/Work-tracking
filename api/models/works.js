@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const WorkingSchema = new mongoose.Schema({
+const WorksSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -12,4 +12,4 @@ const WorkingSchema = new mongoose.Schema({
   date: { type: Date, required: true, default: Date.now },
 });
 
-module.exports = mongoose.model("Working", WorkingSchema);
+module.exports = mongoose.model("Works", WorksSchema);

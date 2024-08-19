@@ -3,23 +3,20 @@ const mongoose = require("mongoose");
 var cors = require("cors");
 require("dotenv").config();
 
-var corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true,
-  methods: "PATCH,DELETE,POST,GET",
-};
-
 const app = express();
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    methods: "PATCH,DELETE,POST,GET",
+  })
+);
 
 const workingRouter = require("./routes/working");
 
-app.get("", (req, res) => {
-  res.send("API is running...");
-});
-
-app.use("/working", workingRouter);
+app.use("/api", workingRouter);
 
 mongoose
   .connect(process.env.DB_URL)
@@ -30,6 +27,7 @@ mongoose
     console.log(err);
   });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Example app listening on port ${process.env.PORT}`);
-});
+app.listen(
+  process.env.PORT,
+  console.log(`Server running on port ${process.env.PORT} `)
+);
