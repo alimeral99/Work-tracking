@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddWorking.css";
 import Alert from "../Alert";
 import API_URL from "../../api";
@@ -24,9 +24,11 @@ function AddWorking() {
       });
 
       if (res) {
-        // setResponseMessages(res.data);
         showAlert(true, "#28a745", res.data);
-        // navigate("/working");
+
+        setTimeout(() => {
+          navigate("/working");
+        }, 2000); // 2
       }
     } catch (error) {
       showAlert(true, "#b30000", error.response.data);

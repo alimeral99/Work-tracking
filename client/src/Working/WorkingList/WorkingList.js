@@ -12,7 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 function createData(works, durations, id) {
-  return { works, durations };
+  return { works, durations, id };
 }
 
 function WorkingList() {
@@ -49,13 +49,11 @@ function WorkingList() {
           <TableBody>
             {rows.map((row, id) => (
               <TableRow
-                key={row.name}
+                key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell key={id} style={{ color: "grey" }}>
-                  {row.works}
-                </TableCell>
-                <TableCell key={id} style={{ color: "grey" }} align="right">
+                <TableCell style={{ color: "grey" }}>{row.works}</TableCell>
+                <TableCell style={{ color: "grey" }} align="right">
                   {row.durations}
                 </TableCell>
               </TableRow>
