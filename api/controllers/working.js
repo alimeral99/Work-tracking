@@ -27,7 +27,30 @@ const getWorking = async (req, res, next) => {
   }
 };
 
+const searchWorking = async (req, res, next) => {
+  const { date } = req.query;
+
+  console.log(date);
+
+  if (!date) {
+    return res.status(404).json("Plase enter a fiel");
+  }
+
+  try {
+    const date = await Record.find({
+      createdAt: {
+        $gte: new Date(startDate),
+      },
+    });
+
+    res.status(200).json(records);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getWorking,
   createWorking,
+  searchWorking,
 };
