@@ -33,19 +33,19 @@ const searchWorking = async (req, res, next) => {
   console.log(date);
 
   if (!date) {
-    return res.status(404).json("Plase enter a fiel");
+    return res.status(404).json("please fill in the entire field");
   }
 
-  try {
-    const date = await Record.find({
-      date: {
-        $gte: new Date(date),
-      },
-    });
+  const getDate = await Works.find({
+    date,
+  });
 
-    res.status(200).json(date);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
+  if (getDate < 1) {
+    return res.status(404).json("There is no study on this date");
+  }
+
+  if (getDate) {
+    res.status(200).json(getDate);
   }
 };
 
