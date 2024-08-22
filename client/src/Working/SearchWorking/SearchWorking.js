@@ -3,13 +3,17 @@ import "./SearchWorking.css";
 import API_URL from "../../api";
 
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function SearchWorking() {
   const [date, setDate] = useState(new Date());
 
-  console.log(date);
+  const works = useSelector((state) => state.works);
+  const dispatch = useDispatch();
+
+  console.log(works);
 
   const handleSearch = async (e) => {
     e.preventDefault();
