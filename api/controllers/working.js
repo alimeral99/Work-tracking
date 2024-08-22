@@ -28,7 +28,7 @@ const getWorking = async (req, res, next) => {
 };
 
 const searchWorking = async (req, res, next) => {
-  const { date } = req.query;
+  const date = req.params.query;
 
   console.log(date);
 
@@ -38,12 +38,12 @@ const searchWorking = async (req, res, next) => {
 
   try {
     const date = await Record.find({
-      createdAt: {
-        $gte: new Date(startDate),
+      date: {
+        $gte: new Date(date),
       },
     });
 
-    res.status(200).json(records);
+    res.status(200).json(date);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

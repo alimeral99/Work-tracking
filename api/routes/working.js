@@ -8,8 +8,8 @@ const {
 } = require("../controllers/working");
 
 router.get("/works", getWorking);
+router.get("/searchWorks/:query", searchWorking);
 
 router.post("/addWorks", createWorking);
-router.post("/searchWorks/:query", searchWorking);
 
 module.exports = router;

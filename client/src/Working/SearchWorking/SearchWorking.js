@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./SearchWorking.css";
+import API_URL from "../../api";
 
+import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -9,15 +11,18 @@ function SearchWorking() {
 
   console.log(date);
 
-  const handleSearching = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-
-    console.log(date);
+    try {
+      const response = await axios.get(`${API_URL}/api/searchWorks/${date}`);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
-
   return (
     <div className="search-working">
-      <form className="date-form" onSubmit={handleSearching}>
+      <form onSubmit={handleSearch} className="date-form">
         <DatePicker
           wrapperClassName="date-picker"
           selected={date}
