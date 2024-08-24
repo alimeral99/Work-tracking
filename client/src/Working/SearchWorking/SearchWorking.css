@@ -4,7 +4,7 @@
 
 .date-form {
   display: flex;
-  padding: 5px;
+  /* padding: 5px; */
   border: 1px solid lightgray;
 }
 
@@ -15,7 +15,7 @@
 
 .react-datepicker__input-container input {
   width: 95%;
-  padding: 7px;
+  padding: 10px;
   margin-left: 5px;
   outline: none;
   background: none;

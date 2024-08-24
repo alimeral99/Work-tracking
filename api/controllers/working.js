@@ -34,6 +34,8 @@ const getWorking = async (req, res, next) => {
 const searchWorking = async (req, res, next) => {
   const date = req.params.query;
 
+  console.log(date);
+
   if (!date) {
     return res.status(404).json("please fill in the entire field");
   }
@@ -45,7 +47,9 @@ const searchWorking = async (req, res, next) => {
     date: queryDate,
   });
 
-  if (getDate) {
+  console.log(getDate);
+
+  if (getDate.length > 1) {
     return res.status(404).json("There is no study on this date");
   }
 
