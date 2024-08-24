@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./SearchWorking.css";
-import API_URL from "../../api";
+import { searchWorks } from "../../redux/Works/WorkApi";
+import API_URL from "../../redux/Works/api";
 
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,21 +10,17 @@ import "react-datepicker/dist/react-datepicker.css";
 
 function SearchWorking() {
   const [date, setDate] = useState(new Date());
+  const { currentWorks } = useSelector((state) => state.works);
 
-  const works = useSelector((state) => state.works);
   const dispatch = useDispatch();
 
-  console.log(works);
+  console.log(currentWorks);
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.get(`${API_URL}/api/searchWorks/${date}`);
-      console.log(response);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+    searchWorks(dispatch, date);
   };
+
   return (
     <div className="search-working">
       <form onSubmit={handleSearch} className="date-form">

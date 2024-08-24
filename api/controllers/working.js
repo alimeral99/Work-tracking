@@ -2,13 +2,17 @@ const Works = require("../models/works");
 
 const createWorking = async (req, res, next) => {
   const { date, name, duration } = req.body;
+
   if ((!date, !name, !duration)) {
     return res.status(400).send("Please fill in all field.");
   }
+
   if (duration <= 0) {
     return res.status(400).send("Please enter a positive number.");
   }
-  const newWorks = new Works({ date, name, duration });
+
+  const newWorks = new Works({ date: new Date(date), name, duration });
+
   try {
     await newWorks.save();
     res.status(201).json("Post process successful");
@@ -30,17 +34,18 @@ const getWorking = async (req, res, next) => {
 const searchWorking = async (req, res, next) => {
   const date = req.params.query;
 
-  console.log(date);
-
   if (!date) {
     return res.status(404).json("please fill in the entire field");
   }
 
+  const queryDate = new Date(date);
+  queryDate.setHours(0, 0, 0, 0);
+
   const getDate = await Works.find({
-    date,
+    date: queryDate,
   });
 
-  if (getDate < 1) {
+  if (getDate) {
     return res.status(404).json("There is no study on this date");
   }
 

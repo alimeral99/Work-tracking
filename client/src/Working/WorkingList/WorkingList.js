@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./WorkingList.css";
-import API_URL from "../../api";
+import API_URL from "../../redux/Works/api";
+import { getWorks } from "../../redux/Works/WorkApi";
 
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -16,21 +17,17 @@ function createData(works, durations, id) {
 }
 
 function WorkingList() {
-  const [works, setWorks] = useState([]);
+  const { currentWorks } = useSelector((state) => state.works);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getWorks();
+    getWorks(dispatch);
   }, []);
 
-  const getWorks = async () => {
-    try {
-      const { data } = await axios.get(`${API_URL}/api/works`);
-      setWorks(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  if (!currentWorks) return <h1>Loading</h1>;
 
-  const rows = works.map((work) =>
+  const rows = currentWorks.map((work) =>
     createData(work.name, work.duration, work._id)
   );
 

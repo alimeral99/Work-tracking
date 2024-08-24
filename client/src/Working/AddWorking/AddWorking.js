@@ -1,59 +1,48 @@
 import React, { useState, useEffect } from "react";
 import "./AddWorking.css";
 import Alert from "../Alert";
-import API_URL from "../../api";
+import API_URL from "../../redux/Works/api";
+import { createWorks } from "../../redux/Works/WorkApi";
 
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function AddWorking() {
   const [date, setDate] = useState("");
   const [name, setName] = useState("");
-  const [durations, setDurations] = useState("");
-  const [alert, setAlert] = useState({ show: false, type: "", msg: "" });
-  const navigate = useNavigate();
+  const [duration, setDuration] = useState("");
 
-  const addWorks = async (e) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleAddWorks = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await axios.post(`${API_URL}/api/addworks`, {
-        date: date,
-        name: name,
-        duration: durations,
-      });
+    const createContent = {
+      date,
+      name,
+      duration,
+    };
 
-      if (res) {
-        showAlert(true, "#28a745", res.data);
-
-        setTimeout(() => {
-          navigate("/working");
-        }, 2000); // 2
-      }
-    } catch (error) {
-      showAlert(true, "#b30000", error.response.data);
-    }
-  };
-
-  const showAlert = (show = false, type = "", msg = "") => {
-    setAlert({ show, type, msg });
+    createWorks(dispatch, createContent);
   };
 
   return (
     <div className="add-working">
-      <form onSubmit={addWorks}>
+      <form onSubmit={handleAddWorks}>
         <h2 className="form-header">Add Working</h2>
-
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
 
         <div className="input-container">
           <label>Date</label>
-          <input
-            placeholder="date"
-            onChange={(e) => setDate(e.target.value)}
-            type="date"
-            min="1924-04-01"
-            max="2100-04-30"
+
+          <DatePicker
+            style={{ border: "block" }}
+            wrapperClassName="date-picker"
+            selected={date}
+            onChange={(date) => setDate(date)}
           />
         </div>
 
@@ -70,7 +59,7 @@ function AddWorking() {
           <label>Durations</label>
           <input
             placeholder="duration"
-            onChange={(e) => setDurations(e.target.value)}
+            onChange={(e) => setDuration(e.target.value)}
             type="number"
           />
         </div>
