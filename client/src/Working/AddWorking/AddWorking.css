@@ -9,7 +9,7 @@
 .add-working > form {
   padding: 5px;
   width: 60%;
-  height: 350px;
+  height: max-content;
   background-color: #ffffff;
   border: 1px solid lightgray;
 }

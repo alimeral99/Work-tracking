@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "./AddWorking.css";
-import Alert from "../Alert";
 import API_URL from "../../redux/Works/api";
 import { createWorks } from "../../redux/Works/WorkApi";
 
 import axios from "axios";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function AddWorking() {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date(Date.now()));
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
+
+  const { error } = useSelector((state) => state.works);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,10 +34,12 @@ function AddWorking() {
     createWorks(dispatch, createContent);
   };
 
+  console.log(error);
   return (
     <div className="add-working">
       <form onSubmit={handleAddWorks}>
         <h2 className="form-header">Add Working</h2>
+        {error && <Alert severity="error">{error}</Alert>}
 
         <div className="input-container">
           <label>Date</label>
