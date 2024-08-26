@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -20px;
   height: 100vh;
 }
 
@@ -19,15 +20,21 @@
 }
 
 .input-container {
-  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
   margin-top: 10px;
   color: #333;
   padding: 5px;
+  width: 80%;
 }
 
 .input-container > label {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 300;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  display: block;
+  color: gray;
 }
 
 .input-container > input {
@@ -35,14 +42,27 @@
   height: 35px;
   font-size: 15px;
   border: 1px solid lightgray;
-  margin-left: 5px;
   outline: none;
-  padding: 5px;
+  padding: 10px;
+  color: gray;
 }
 
+.input-container .react-datepicker__input-container input {
+  width: 80%;
+  height: 35px;
+  font-size: 15px;
+  border: 1px solid lightgray;
+  outline: none;
+  padding: 10px;
+  color: gray;
+}
+
+.input-container > .date-picker {
+  width: 100%;
+}
 .button-container {
   margin-top: 20px;
-  width: 90%;
+  width: 65%;
   text-align: right;
 }
 

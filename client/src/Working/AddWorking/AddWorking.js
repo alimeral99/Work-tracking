@@ -39,7 +39,6 @@ function AddWorking() {
           <label>Date</label>
 
           <DatePicker
-            style={{ border: "block" }}
             wrapperClassName="date-picker"
             selected={date}
             onChange={(date) => setDate(date)}

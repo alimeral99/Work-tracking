@@ -47,8 +47,6 @@ const searchWorking = async (req, res, next) => {
     date: queryDate,
   });
 
-  console.log(getDate);
-
   if (getDate.length > 1) {
     return res.status(404).json("There is no study on this date");
   }

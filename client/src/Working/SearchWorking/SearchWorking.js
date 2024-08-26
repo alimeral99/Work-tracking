@@ -25,9 +25,9 @@ function SearchWorking() {
     <div className="search-working">
       <form onSubmit={handleSearch} className="date-form">
         <DatePicker
-          wrapperClassName="date-picker"
           selected={date}
           onChange={(date) => setDate(date)}
+          wrapperClassName="date-picker"
         />
         <button>Search</button>
       </form>
