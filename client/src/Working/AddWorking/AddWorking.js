@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./AddWorking.css";
-import API_URL from "../../redux/Works/api";
 import { createWorks } from "../../redux/Works/WorkApi";
+import { reset } from "../../redux/Works/WorksSlice";
 
-import axios from "axios";
 import Alert from "@mui/material/Alert";
-
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
@@ -25,6 +23,8 @@ function AddWorking() {
     if (isSuccess) {
       navigate("/working");
     }
+
+    dispatch(reset());
   }, [isSuccess, navigate, dispatch]);
 
   const handleAddWorks = async (e) => {

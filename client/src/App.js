@@ -6,19 +6,19 @@ import Working from "./Working/Working";
 
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { resetError } from "./redux/Works/WorksSlice";
+import { reset } from "./redux/Works/WorksSlice";
 
 function App() {
-  const { error } = useSelector((state) => state.works);
+  const { error, isSuccess } = useSelector((state) => state.works);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (error) {
+    if (error || isSuccess) {
       setTimeout(() => {
-        dispatch(resetError(null));
+        dispatch(reset());
       }, 3000);
     }
-  }, [error]);
+  }, [error, isSuccess]);
 
   return (
     <div className="app">

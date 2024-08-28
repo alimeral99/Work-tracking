@@ -3,3 +3,17 @@
   height: 400px;
   width: 60%;
 }
+
+.createWork-links {
+  display: block;
+  height: 35px;
+  width: 35px;
+  background-color: #ffff;
+  border: 1px solid lightgray;
+  cursor: pointer;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: gray;
+}

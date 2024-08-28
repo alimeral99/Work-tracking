@@ -3,6 +3,7 @@ import "./WorkingList.css";
 import API_URL from "../../redux/Works/api";
 import Loading from "../../Loading/Loading";
 import { getWorks } from "../../redux/Works/WorkApi";
+import { reset } from "../../redux/Works/WorksSlice";
 
 import { useSelector, useDispatch } from "react-redux";
 import Table from "@mui/material/Table";
@@ -18,17 +19,17 @@ function createData(works, durations, id) {
 }
 
 function WorkingList() {
-  const { currentWorks } = useSelector((state) => state.works);
+  const { currentWorks, isSuccess } = useSelector((state) => state.works);
 
   const dispatch = useDispatch();
 
+  console.log(isSuccess);
+
   useEffect(() => {
     getWorks(dispatch);
-  }, []);
+  }, [dispatch]);
 
   if (!currentWorks) return <Loading />;
-
-  console.log(currentWorks);
 
   const rows = currentWorks.map((work) =>
     createData(work.name, work.duration, work._id)
