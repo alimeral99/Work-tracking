@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./WorkingList.css";
 import API_URL from "../../redux/Works/api";
+import Loading from "../../Loading/Loading";
 import { getWorks } from "../../redux/Works/WorkApi";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -25,7 +26,9 @@ function WorkingList() {
     getWorks(dispatch);
   }, []);
 
-  if (!currentWorks) return <h1>Loading</h1>;
+  if (!currentWorks) return <Loading />;
+
+  console.log(currentWorks);
 
   const rows = currentWorks.map((work) =>
     createData(work.name, work.duration, work._id)
@@ -44,7 +47,7 @@ function WorkingList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, id) => (
+            {rows?.map((row, id) => (
               <TableRow
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

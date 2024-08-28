@@ -5,7 +5,6 @@ import { createWorks } from "../../redux/Works/WorkApi";
 
 import axios from "axios";
 import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,10 +16,16 @@ function AddWorking() {
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
 
-  const { error } = useSelector((state) => state.works);
+  const { error, isSuccess } = useSelector((state) => state.works);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/working");
+    }
+  }, [isSuccess, navigate, dispatch]);
 
   const handleAddWorks = async (e) => {
     e.preventDefault();
@@ -34,7 +39,6 @@ function AddWorking() {
     createWorks(dispatch, createContent);
   };
 
-  console.log(error);
   return (
     <div className="add-working">
       <form onSubmit={handleAddWorks}>

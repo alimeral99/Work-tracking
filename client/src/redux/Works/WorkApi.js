@@ -26,9 +26,7 @@ export const getWorks = async (dispatch) => {
 export const createWorks = async (dispatch, createContent) => {
   try {
     const response = await axios.post(`${API_URL}/api/addworks`, createContent);
-    dispatch(getCurrentWorks(response.data));
-
-    console.log(response);
+    dispatch(getCurrentWorks());
   } catch (error) {
     const { data } = error.response;
     dispatch(showError(data));

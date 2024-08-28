@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   currentWorks: null,
   error: null,
+  isSuccess: false,
   loading: false,
 };
 
@@ -14,6 +15,7 @@ export const worksSlice = createSlice({
       state.currentWorks = action.payload;
       state.loading = false;
       state.error = null;
+      state.isSuccess = true;
     },
     showError: (state, action) => {
       state.loading = false;
