@@ -4,11 +4,15 @@ const createWorking = async (req, res, next) => {
   const { date, name, duration } = req.body;
 
   if ((!date, !name, !duration)) {
-    return res.status(400).send("Please fill in all field.");
+    return res.status(400).json("Please fill in all field.");
+  }
+
+  if (!typeof name === "string") {
+    return res.status(400).json("Name must be a string!");
   }
 
   if (duration <= 0) {
-    return res.status(400).send("Please enter a positive number.");
+    return res.status(400).json("Please enter a positive number.");
   }
 
   const newWorks = new Works({ date: new Date(date), name, duration });

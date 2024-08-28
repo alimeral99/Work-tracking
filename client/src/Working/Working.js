@@ -12,7 +12,7 @@ function Working() {
   return (
     <div className="working">
       <div className="working-links">
-        <Link to={"/addworking"} className="createWork-links">
+        <Link to={"/addworking"} className={"link-styles createWork-links"}>
           +
         </Link>
       </div>
