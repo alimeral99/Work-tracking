@@ -4,6 +4,7 @@ import API_URL from "./api";
 
 export const searchWorks = async (dispatch, date) => {
   try {
+    console.log(date);
     const { data } = await axios.get(`${API_URL}/api/searchWorks/${date}`);
     console.log(data);
     dispatch(getCurrentWorks(data));
@@ -16,7 +17,6 @@ export const getWorks = async (dispatch) => {
   try {
     const { data } = await axios.get(`${API_URL}/api/works`);
 
-    console.log(data);
     dispatch(getCurrentWorks(data));
   } catch (error) {
     console.error(error);

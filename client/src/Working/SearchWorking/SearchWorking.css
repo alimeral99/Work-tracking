@@ -30,3 +30,12 @@
   background-color: lightgray;
   cursor: pointer;
 }
+
+.toogle-button {
+  margin-top: 4px;
+  width: 200px;
+  height: 25px;
+  background-color: #ffffff;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}

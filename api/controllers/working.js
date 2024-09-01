@@ -15,6 +15,8 @@ const createWorking = async (req, res, next) => {
     return res.status(400).json("Please enter a positive number.");
   }
 
+  console.log(date);
+
   const newWorks = new Works({ date: new Date(date), name, duration });
 
   try {
@@ -38,26 +40,40 @@ const getWorking = async (req, res, next) => {
 const searchWorking = async (req, res, next) => {
   const date = req.params.query;
 
-  console.log(date);
-
   if (!date) {
     return res.status(404).json("please fill in the entire field");
   }
 
-  const queryDate = new Date(date);
-  queryDate.setHours(0, 0, 0, 0);
+  let results;
 
-  const getDate = await Works.find({
-    date: queryDate,
-  });
+  if (date.length === 7) {
+    const [year, month] = date.split("-");
 
-  if (getDate.length > 1) {
+    results = await Works.find({
+      date: {
+        $gte: new Date(year, month - 1, 1),
+        $lt: new Date(year, month, 1),
+      },
+    });
+  } else if (date.length > 7) {
+    const searchAllDate = new Date(date);
+
+    const startOfDay = new Date(searchAllDate.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(searchAllDate.setHours(23, 59, 59, 999));
+
+    results = await Works.find({
+      date: {
+        $gte: startOfDay,
+        $lte: endOfDay,
+      },
+    });
+  } else {
     return res.status(404).json("There is no study on this date");
   }
 
-  if (getDate) {
-    res.status(200).json(getDate);
-  }
+  console.log(results);
+
+  res.status(200).json(results);
 };
 
 module.exports = {
