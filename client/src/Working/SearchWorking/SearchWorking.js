@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import "./SearchWorking.css";
 import { searchWorks } from "../../redux/Works/WorkApi";
-import API_URL from "../../redux/Works/api";
+import { reset } from "../../redux/Works/WorksSlice";
 
-import { format } from "date-fns";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
+import { format } from "date-fns";
+
 import "react-datepicker/dist/react-datepicker.css";
 
 function SearchWorking() {
   const [date, setDate] = useState(new Date());
   const [isMonthPicker, setIsMonthPicker] = useState(false);
 
-  const { currentWorks } = useSelector((state) => state.works);
+  const { currentWorks, error } = useSelector((state) => state.works);
 
   const dispatch = useDispatch();
 
@@ -26,6 +26,7 @@ function SearchWorking() {
     } else {
       searchWorks(dispatch, date);
     }
+    dispatch(reset());
   };
 
   const handlePickerToggle = () => {
@@ -33,7 +34,6 @@ function SearchWorking() {
     setIsMonthPicker(!isMonthPicker);
   };
 
-  console.log(date);
   return (
     <div className="search-working">
       <form onSubmit={handleSearch} className="date-form">

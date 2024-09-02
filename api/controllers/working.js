@@ -46,6 +46,7 @@ const searchWorking = async (req, res, next) => {
 
   let results;
 
+  //If the incoming request is the month
   if (date.length === 7) {
     const [year, month] = date.split("-");
 
@@ -55,6 +56,7 @@ const searchWorking = async (req, res, next) => {
         $lt: new Date(year, month, 1),
       },
     });
+    //If the incoming request is the all date
   } else if (date.length > 7) {
     const searchAllDate = new Date(date);
 
@@ -67,11 +69,11 @@ const searchWorking = async (req, res, next) => {
         $lte: endOfDay,
       },
     });
-  } else {
-    return res.status(404).json("There is no study on this date");
   }
 
-  console.log(results);
+  if (results.length < 1) {
+    return res.status(404).json("There is no study on this date");
+  }
 
   res.status(200).json(results);
 };

@@ -4,6 +4,7 @@ const initialState = {
   currentWorks: null,
   error: null,
   isSuccess: false,
+  alert: null,
   loading: false,
 };
 
@@ -14,6 +15,7 @@ export const worksSlice = createSlice({
     reset: (state) => {
       state.isSuccess = false;
       state.error = false;
+      state.alert = false;
     },
     getCurrentWorks: (state, action) => {
       state.currentWorks = action.payload;
@@ -25,10 +27,14 @@ export const worksSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    showAlert: (state, action) => {
+      state.alert = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { getCurrentWorks, showError, reset } = worksSlice.actions;
+export const { getCurrentWorks, showError, showAlert, reset } =
+  worksSlice.actions;
 
 export default worksSlice.reducer;

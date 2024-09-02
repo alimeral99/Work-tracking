@@ -1,15 +1,17 @@
 import axios from "axios";
-import { getCurrentWorks, showError } from "./WorksSlice";
+import { getCurrentWorks, showError, showAlert } from "./WorksSlice";
 import API_URL from "./api";
 
 export const searchWorks = async (dispatch, date) => {
   try {
-    console.log(date);
     const { data } = await axios.get(`${API_URL}/api/searchWorks/${date}`);
-    console.log(data);
     dispatch(getCurrentWorks(data));
+
+    console.log(data);
   } catch (error) {
-    console.error(error);
+    console.log(error);
+    const { data } = error.response;
+    dispatch(showAlert(data));
   }
 };
 
