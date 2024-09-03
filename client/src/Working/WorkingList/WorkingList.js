@@ -5,6 +5,7 @@ import Loading from "../../Loading/Loading";
 import { getWorks } from "../../redux/Works/WorkApi";
 import { getCurrentWorks, reset } from "../../redux/Works/WorksSlice";
 
+import Alert from "@mui/material/Alert";
 import { useSelector, useDispatch } from "react-redux";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -19,9 +20,7 @@ function createData(works, durations, id) {
 }
 
 function WorkingList() {
-  const { currentWorks, isSuccess, alert } = useSelector(
-    (state) => state.works
-  );
+  const { currentWorks, alert } = useSelector((state) => state.works);
 
   const dispatch = useDispatch();
 
@@ -38,7 +37,7 @@ function WorkingList() {
   return (
     <div className="workingList">
       {alert ? (
-        <p>{alert}</p>
+        <Alert severity="info">{alert}</Alert>
       ) : (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -58,7 +57,7 @@ function WorkingList() {
                 >
                   <TableCell style={{ color: "grey" }}>{row.works}</TableCell>
                   <TableCell style={{ color: "grey" }} align="right">
-                    {row.durations}
+                    {row.durations} hours
                   </TableCell>
                 </TableRow>
               ))}

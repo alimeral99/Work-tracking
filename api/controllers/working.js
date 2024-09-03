@@ -50,12 +50,39 @@ const searchWorking = async (req, res, next) => {
   if (date.length === 7) {
     const [year, month] = date.split("-");
 
-    results = await Works.find({
-      date: {
-        $gte: new Date(year, month - 1, 1),
-        $lt: new Date(year, month, 1),
+    // results = await Works.find({
+    //   date: {
+    //     $gte: new Date(year, month - 1, 1),
+    //     $lt: new Date(year, month, 1),
+    //   },
+    // });
+
+    results = await Works.aggregate([
+      {
+        $match: {
+          date: {
+            $gte: new Date(year, month - 1, 1),
+            $lt: new Date(year, month, 1),
+          },
+        },
       },
-    });
+      {
+        $group: {
+          _id: "$name",
+          duration: { $sum: "$duration" },
+          date: { $first: "$date" },
+        },
+      },
+      {
+        $project: {
+          name: "$_id",
+          date: "$date",
+          duration: "$duration",
+          _id: 0,
+        },
+      },
+    ]);
+
     //If the incoming request is the all date
   } else if (date.length > 7) {
     const searchAllDate = new Date(date);
