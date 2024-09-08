@@ -14,13 +14,15 @@ const createWorking = async (req, res, next) => {
   if (duration <= 0) {
     return res.status(400).json("Please enter a positive number.");
   }
-
-  console.log(date);
-
-  const newWorks = new Works({ date: new Date(date), name, duration });
-
+  // const worksDate = new Date(date).toISOString;
+  const newWorks = new Works({
+    date: new Date(date).toISOString(),
+    name,
+    duration,
+  });
   try {
     await newWorks.save();
+
     res.status(201).json("Post process successful");
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -49,13 +51,6 @@ const searchWorking = async (req, res, next) => {
   //If the incoming request is the month
   if (date.length === 7) {
     const [year, month] = date.split("-");
-
-    // results = await Works.find({
-    //   date: {
-    //     $gte: new Date(year, month - 1, 1),
-    //     $lt: new Date(year, month, 1),
-    //   },
-    // });
 
     results = await Works.aggregate([
       {
@@ -105,8 +100,56 @@ const searchWorking = async (req, res, next) => {
   res.status(200).json(results);
 };
 
+const comparisonWorking = async (req, res, next) => {
+  const results = await Works.aggregate([
+    {
+      $group: {
+        _id: {
+          year: { $year: "$date" },
+          month: { $month: "$date" },
+        },
+        totalDuration: { $sum: "$duration" },
+      },
+    },
+    {
+      $sort: { "_id.year": 1, "_id.month": 1 },
+    },
+    {
+      $project: {
+        _id: 0,
+        year: "$_id.year",
+        month: {
+          $arrayElemAt: [
+            [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ],
+            { $subtract: ["$_id.month", 1] },
+          ],
+        },
+        totalDuration: 1,
+      },
+    },
+  ]);
+
+  if (results) {
+    res.status(200).json(results);
+  }
+};
+
 module.exports = {
   getWorking,
   createWorking,
   searchWorking,
+  comparisonWorking,
 };

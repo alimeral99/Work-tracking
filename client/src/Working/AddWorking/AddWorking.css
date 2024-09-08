@@ -16,45 +16,57 @@
 
 .form-header {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  color: gray;
+  color: #242424;
+}
+
+.test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .input-container {
-  display: flex;
-  flex-direction: column;
   margin-top: 10px;
-  color: #333;
+  align-items: center;
+  color: #242424;
   padding: 5px;
-  width: 80%;
+  width: 90%;
 }
 
 .input-container > label {
-  font-size: 15px;
-  font-weight: 300;
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
   margin-bottom: 5px;
   text-transform: uppercase;
-  display: block;
-  color: gray;
+  color: #242424;
 }
 
 .input-container > input {
   width: 80%;
-  height: 35px;
+  height: 40px;
   font-size: 15px;
   border: 1px solid lightgray;
+  border-radius: 15px;
   outline: none;
   padding: 10px;
-  color: gray;
+  color: #242424;
 }
 
 .input-container .react-datepicker__input-container input {
   width: 80%;
-  height: 35px;
+  height: 40px;
   font-size: 15px;
   border: 1px solid lightgray;
-  outline: none;
+  border-radius: 15px;
   padding: 10px;
-  color: gray;
+  color: #242424;
+}
+
+input:focus,
+.react-datepicker__input-container input:focus {
+  border-color: #3498db;
+  outline: none;
 }
 
 .input-container > .date-picker {
@@ -69,7 +81,8 @@
 .add-button {
   padding: 8px;
   border: none;
-  background-color: grey;
+  border-radius: 15px;
+  background-color: #242424;
   color: #ffffff;
   cursor: pointer;
   width: 30%;

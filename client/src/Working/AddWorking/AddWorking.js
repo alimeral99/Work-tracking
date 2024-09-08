@@ -21,7 +21,7 @@ function AddWorking() {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/working");
+      navigate("/");
     }
 
     dispatch(reset());
@@ -45,36 +45,38 @@ function AddWorking() {
         <h2 className="form-header">Add Working</h2>
         {error && <Alert severity="error">{error}</Alert>}
 
-        <div className="input-container">
-          <label>Date</label>
+        <div className="test-container">
+          <div className="input-container">
+            <label>Date</label>
 
-          <DatePicker
-            wrapperClassName="date-picker"
-            selected={date}
-            onChange={(date) => setDate(date)}
-          />
-        </div>
+            <DatePicker
+              wrapperClassName="date-picker"
+              selected={date}
+              onChange={(date) => setDate(date)}
+            />
+          </div>
 
-        <div className="input-container">
-          <label>Name </label>
-          <input
-            placeholder="name"
-            onChange={(e) => setName(e.target.value)}
-            type="text"
-          />
-        </div>
+          <div className="input-container">
+            <label>Name </label>
+            <input
+              placeholder="name"
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+            />
+          </div>
 
-        <div className="input-container">
-          <label>Durations</label>
-          <input
-            placeholder="duration"
-            onChange={(e) => setDuration(e.target.value)}
-            type="number"
-          />
-        </div>
+          <div className="input-container">
+            <label>Durations</label>
+            <input
+              placeholder="duration"
+              onChange={(e) => setDuration(e.target.value)}
+              type="number"
+            />
+          </div>
 
-        <div className="button-container">
-          <button className="add-button">Add Working</button>
+          <div className="button-container">
+            <button className="add-button">Add Working</button>
+          </div>
         </div>
       </form>
     </div>
