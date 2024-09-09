@@ -13,9 +13,6 @@ function SearchWorking() {
   const [date, setDate] = useState(new Date());
   const [isMonthPicker, setIsMonthPicker] = useState(false);
 
-  const { currentWorks, error } = useSelector((state) => state.works);
-
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSearch = async (e) => {

@@ -101,7 +101,19 @@ const searchWorking = async (req, res, next) => {
 };
 
 const comparisonWorking = async (req, res, next) => {
+  const name = req.params.query;
+
+  if (!name) {
+    return res.status(400).json("Please enter a work.");
+  }
+
   const results = await Works.aggregate([
+    {
+      $match: {
+        name: name,
+      },
+    },
+
     {
       $group: {
         _id: {
@@ -141,6 +153,10 @@ const comparisonWorking = async (req, res, next) => {
       },
     },
   ]);
+
+  if (results.length === 0) {
+    return res.status(404).json("No works found for the given name.");
+  }
 
   if (results) {
     res.status(200).json(results);

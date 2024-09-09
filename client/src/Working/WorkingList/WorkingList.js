@@ -38,6 +38,7 @@ function WorkingList() {
   const rows = currentWorks.map((work) =>
     createData(work.name, work.duration, work._id)
   );
+
   return (
     <div className="working-list">
       {filteredWorks ? (

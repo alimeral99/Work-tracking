@@ -9,10 +9,10 @@ const {
 } = require("../controllers/working");
 
 router.get("/works", getWorking);
-router.get("/comparisonWorks", comparisonWorking);
 
 router.get("/searchWorks/:query", searchWorking);
 
 router.post("/addWorks", createWorking);
+router.post("/comparisonWorks/:query", comparisonWorking);
 
 module.exports = router;

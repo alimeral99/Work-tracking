@@ -40,11 +40,12 @@ export const createWorks = async (dispatch, createContent) => {
   }
 };
 
-export const comparisonWorks = async (dispatch) => {
+export const comparisonWorks = async (dispatch, name) => {
   try {
-    const { data } = await axios.get(`${API_URL}/api/comparisonWorks`);
+    const { data } = await axios.post(`${API_URL}/api/comparisonWorks/${name}`);
     dispatch(setComparisonWorks(data));
   } catch (error) {
-    console.error(error);
+    const { data } = error.response;
+    dispatch(showAlert(data));
   }
 };
