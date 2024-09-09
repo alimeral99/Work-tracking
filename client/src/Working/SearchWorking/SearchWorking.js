@@ -4,9 +4,9 @@ import { searchWorks } from "../../redux/Works/WorkApi";
 import { reset } from "../../redux/Works/WorksSlice";
 
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
-
 import "react-datepicker/dist/react-datepicker.css";
 
 function SearchWorking() {
@@ -15,6 +15,7 @@ function SearchWorking() {
 
   const { currentWorks, error } = useSelector((state) => state.works);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSearch = async (e) => {
@@ -26,6 +27,7 @@ function SearchWorking() {
     } else {
       searchWorks(dispatch, date);
     }
+
     dispatch(reset());
   };
 

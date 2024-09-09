@@ -1,0 +1,60 @@
+import React from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
+function createData(works, durations, id) {
+  return { works, durations, id };
+}
+
+function FilterWorking() {
+  const { filteredWorks } = useSelector((state) => state.works);
+
+  if (!filteredWorks) {
+    return <h1>Loading</h1>;
+  }
+
+  const rows = filteredWorks.map((work) =>
+    createData(work.name, work.duration, work._id, work.date)
+  );
+
+  return (
+    <div className="working-list">
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ fontWeight: 600 }}>Works</TableCell>
+
+              <TableCell style={{ fontWeight: 600 }} align="right">
+                Durations
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows?.map((row, id) => (
+              <TableRow
+                key={row.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell style={{ color: "grey" }}>{row.works}</TableCell>
+
+                <TableCell style={{ color: "grey" }} align="right">
+                  {row.durations} hours
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
+}
+
+export default FilterWorking;

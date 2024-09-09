@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./WorkingList.css";
-import API_URL from "../../redux/Works/api";
+import FilterWorking from "./FilterWorking/FilterWorking";
 import Loading from "../../Loading/Loading";
 import { getWorks } from "../../redux/Works/WorkApi";
-import { getCurrentWorks, reset } from "../../redux/Works/WorksSlice";
 
-import Alert from "@mui/material/Alert";
 import { useSelector, useDispatch } from "react-redux";
+import { Alert } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -20,7 +19,9 @@ function createData(works, durations, id) {
 }
 
 function WorkingList() {
-  const { currentWorks, alert } = useSelector((state) => state.works);
+  const { currentWorks, alert, filteredWorks } = useSelector(
+    (state) => state.works
+  );
 
   const dispatch = useDispatch();
 
@@ -30,14 +31,17 @@ function WorkingList() {
 
   if (!currentWorks) return <Loading />;
 
+  if (alert) {
+    return <Alert severity="info">{alert}</Alert>;
+  }
+
   const rows = currentWorks.map((work) =>
     createData(work.name, work.duration, work._id)
   );
-
   return (
-    <div className="workingList">
-      {alert ? (
-        <Alert severity="info">{alert}</Alert>
+    <div className="working-list">
+      {filteredWorks ? (
+        <FilterWorking />
       ) : (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">

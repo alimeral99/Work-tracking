@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentWorks: null,
+  filteredWorks: null,
   error: null,
   isSuccess: false,
   alert: null,
@@ -23,6 +24,11 @@ export const worksSlice = createSlice({
       state.error = null;
       state.isSuccess = true;
     },
+    setFilterWorks: (state, action) => {
+      state.filteredWorks = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
     showError: (state, action) => {
       state.loading = false;
       state.error = action.payload;
@@ -34,7 +40,7 @@ export const worksSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { getCurrentWorks, showError, showAlert, reset } =
+export const { getCurrentWorks, setFilterWorks, showError, showAlert, reset } =
   worksSlice.actions;
 
 export default worksSlice.reducer;
