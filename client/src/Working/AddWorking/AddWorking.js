@@ -13,6 +13,7 @@ function AddWorking() {
   const [date, setDate] = useState(new Date(Date.now()));
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { error, isSuccess } = useSelector((state) => state.works);
 

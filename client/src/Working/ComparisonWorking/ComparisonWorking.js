@@ -17,8 +17,9 @@ import {
 function ComparisonWorking() {
   const [name, setName] = useState("");
 
-  const { comparedWorks } = useSelector((state) => state.comparisonWorks);
-  const { alert } = useSelector((state) => state.works);
+  const { comparedWorks, comparisonAlert } = useSelector(
+    (state) => state.comparisonWorks
+  );
 
   const dispatch = useDispatch();
 
@@ -37,8 +38,9 @@ function ComparisonWorking() {
         />
         <button onClick={handleComparisonWorks}>Search</button>
       </div>
-      {alert ? (
-        <Alert severity="info">{alert}</Alert>
+
+      {comparisonAlert ? (
+        <Alert severity="info">{comparisonAlert}</Alert>
       ) : (
         <ResponsiveContainer width="60%" height={400}>
           <BarChart width={720} height={300} data={comparedWorks}>

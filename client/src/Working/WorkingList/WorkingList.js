@@ -19,6 +19,8 @@ function createData(works, durations, id) {
 }
 
 function WorkingList() {
+  const [date, setDate] = useState("");
+
   const { currentWorks, alert, filteredWorks } = useSelector(
     (state) => state.works
   );

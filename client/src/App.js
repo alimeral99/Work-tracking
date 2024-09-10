@@ -10,16 +10,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { reset } from "./redux/Works/WorksSlice";
 
 function App() {
-  const { error, isSuccess, alert } = useSelector((state) => state.works);
+  const { isSuccess } = useSelector((state) => state.works);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (error || isSuccess || alert) {
+    if (isSuccess) {
       setTimeout(() => {
         dispatch(reset());
       }, 3000);
     }
-  }, [error, isSuccess, alert]);
+  }, [isSuccess]);
 
   return (
     <div className="app">

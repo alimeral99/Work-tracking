@@ -5,7 +5,10 @@ import {
   showAlert,
   setFilterWorks,
 } from "./WorksSlice";
-import { setComparisonWorks } from "./ComparisonWorkSlice";
+import {
+  setComparisonWorks,
+  setShowComparisonAlert,
+} from "./ComparisonWorkSlice";
 import API_URL from "./api";
 
 export const searchWorks = async (dispatch, date) => {
@@ -23,16 +26,13 @@ export const getWorks = async (dispatch) => {
     const { data } = await axios.get(`${API_URL}/api/works`);
 
     dispatch(getCurrentWorks(data));
-  } catch (error) {
-    console.error(error);
-  }
+  } catch (error) {}
 };
 
 export const createWorks = async (dispatch, createContent) => {
   try {
     const response = await axios.post(`${API_URL}/api/addworks`, createContent);
 
-    console.log(response);
     dispatch(getCurrentWorks());
   } catch (error) {
     const { data } = error.response;
@@ -46,6 +46,6 @@ export const comparisonWorks = async (dispatch, name) => {
     dispatch(setComparisonWorks(data));
   } catch (error) {
     const { data } = error.response;
-    dispatch(showAlert(data));
+    dispatch(setShowComparisonAlert(data));
   }
 };

@@ -16,7 +16,6 @@ export const worksSlice = createSlice({
     reset: (state) => {
       state.isSuccess = false;
       state.error = false;
-      state.alert = false;
     },
     getCurrentWorks: (state, action) => {
       state.currentWorks = action.payload;
@@ -26,8 +25,7 @@ export const worksSlice = createSlice({
     },
     setFilterWorks: (state, action) => {
       state.filteredWorks = action.payload;
-      state.loading = false;
-      state.error = null;
+      state.alert = null;
     },
     showError: (state, action) => {
       state.loading = false;
