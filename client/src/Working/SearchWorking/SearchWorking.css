@@ -31,11 +31,20 @@
   cursor: pointer;
 }
 
-.toogle-button {
+.buttons-container {
   margin-top: 4px;
-  width: 200px;
-  height: 25px;
+}
+
+.dateChange-btn,
+.toogle-btn {
   background-color: #ffffff;
   border: 1px solid lightgray;
   cursor: pointer;
+  height: 25px;
+  width: 50px;
+  margin-left: 3px;
+}
+
+.toogle-btn {
+  width: 200px;
 }

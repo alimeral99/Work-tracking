@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./WorkingList.css";
-import FilterWorking from "./FilterWorking/FilterWorking";
 import Loading from "../../Loading/Loading";
-import { getWorks } from "../../redux/Works/WorkApi";
+import { searchWorks } from "../../redux/Works/WorkApi";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Alert } from "@mui/material";
@@ -19,16 +18,14 @@ function createData(works, durations, id) {
 }
 
 function WorkingList() {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
 
-  const { currentWorks, alert, filteredWorks } = useSelector(
-    (state) => state.works
-  );
+  const { currentWorks, alert } = useSelector((state) => state.works);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getWorks(dispatch);
+    searchWorks(dispatch, date);
   }, [dispatch]);
 
   if (!currentWorks) return <Loading />;
@@ -43,35 +40,31 @@ function WorkingList() {
 
   return (
     <div className="working-list">
-      {filteredWorks ? (
-        <FilterWorking />
-      ) : (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell style={{ fontWeight: 600 }}>Works</TableCell>
-                <TableCell style={{ fontWeight: 600 }} align="right">
-                  Durations
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ fontWeight: 600 }}>Works</TableCell>
+              <TableCell style={{ fontWeight: 600 }} align="right">
+                Durations
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows?.map((row, id) => (
+              <TableRow
+                key={row.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell style={{ color: "grey" }}>{row.works}</TableCell>
+                <TableCell style={{ color: "grey" }} align="right">
+                  {row.durations} hours
                 </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows?.map((row, id) => (
-                <TableRow
-                  key={row.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell style={{ color: "grey" }}>{row.works}</TableCell>
-                  <TableCell style={{ color: "grey" }} align="right">
-                    {row.durations} hours
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
