@@ -3,3 +3,26 @@
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   color: gray;
 }
+
+.alert-box {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  width: 100%;
+  height: 130px;
+}
+
+.alert-box > .addWorks-link {
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 10px;
+  border: none;
+  color: rgb(13, 60, 97);
+  border: 1px solid lightgray;
+  background-color: #e5f6fd;
+  border-radius: 5px;
+}

@@ -5,7 +5,6 @@ const initialState = {
   error: null,
   isSuccess: false,
   alert: null,
-  loading: false,
 };
 
 export const worksSlice = createSlice({
@@ -18,7 +17,7 @@ export const worksSlice = createSlice({
     },
     getCurrentWorks: (state, action) => {
       state.currentWorks = action.payload;
-      state.loading = false;
+      state.alert = false;
       state.error = null;
       state.isSuccess = true;
     },

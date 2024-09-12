@@ -38,10 +38,9 @@ function ComparisonWorking() {
         />
         <button onClick={handleComparisonWorks}>Search</button>
       </div>
-
       {comparisonAlert ? (
         <Alert severity="info">{comparisonAlert}</Alert>
-      ) : (
+      ) : comparedWorks ? (
         <ResponsiveContainer width="60%" height={400}>
           <BarChart width={720} height={300} data={comparedWorks}>
             <XAxis dataKey="month" stroke="#242424" />
@@ -50,8 +49,10 @@ function ComparisonWorking() {
 
             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
             <Bar dataKey="totalDuration" fill="#8884d8" barSize={30} />
-          </BarChart>{" "}
+          </BarChart>
         </ResponsiveContainer>
+      ) : (
+        <h2>Enter the work you want to compare</h2>
       )}
     </div>
   );
