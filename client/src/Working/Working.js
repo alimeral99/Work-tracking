@@ -14,6 +14,7 @@ function Working() {
         <Link to={"/addworking"} className={"link-styles links"}>
           <IoMdAdd className="link-icon" />
         </Link>
+
         <Link to={"/comparisonworking"} className={"link-styles links"}>
           <MdOutlineCompareArrows className="link-icon" />
         </Link>

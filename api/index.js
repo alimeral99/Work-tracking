@@ -14,8 +14,12 @@ app.use(
   })
 );
 
-const workingRouter = require("./routes/working");
+const stripe = require("stripe")(process.env.STRİPE_KEY); // secret key from Stripe dashboard
 
+const workingRouter = require("./routes/working");
+const authRouter = require("./routes/auth");
+
+app.use("/auth", authRouter);
 app.use("/api", workingRouter);
 
 mongoose
