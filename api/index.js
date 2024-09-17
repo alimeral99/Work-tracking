@@ -3,24 +3,39 @@ const mongoose = require("mongoose");
 var cors = require("cors");
 require("dotenv").config();
 
+const { handlerwebHook } = require("./controllers/stripe");
+
 const app = express();
-app.use(express.json());
+
+app.use((req, res, next) => {
+  if (req.originalUrl === "/api/webhook") {
+    next(); // Do nothing with the body because I need it in a raw state.
+  } else {
+    express.json()(req, res, next); // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
+  }
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     credentials: true,
     methods: "PATCH,DELETE,POST,GET",
   })
 );
 
-const stripe = require("stripe")(process.env.STRİPE_KEY); // secret key from Stripe dashboard
-
 const workingRouter = require("./routes/working");
 const authRouter = require("./routes/auth");
+const stripeRouter = require("./routes/stripe");
 
+app.post(
+  "/api/webhook",
+  express.raw({ type: "application/json" }),
+  handlerwebHook
+);
 app.use("/auth", authRouter);
 app.use("/api", workingRouter);
+app.use("/stripe", stripeRouter);
 
 mongoose
   .connect(process.env.DB_URL)

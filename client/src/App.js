@@ -4,6 +4,8 @@ import Navbar from "./Navbar/Navbar";
 import AddWorking from "./Working/AddWorking/AddWorking";
 import ComparisonWorking from "./Working/ComparisonWorking/ComparisonWorking";
 import Working from "./Working/Working";
+import PaymentForm from "./PaymentForm/PaymentForm";
+import Success from "./Success/Success";
 
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -29,6 +31,8 @@ function App() {
           <Route path="/" element={<Working />} />
           <Route path="/addworking" element={<AddWorking />} />
           <Route path="/comparisonworking" element={<ComparisonWorking />} />
+          <Route path="/paymentform" element={<PaymentForm />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
       </BrowserRouter>
     </div>
