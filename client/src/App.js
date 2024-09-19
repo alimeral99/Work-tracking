@@ -5,6 +5,7 @@ import AddWorking from "./Working/AddWorking/AddWorking";
 import ComparisonWorking from "./Working/ComparisonWorking/ComparisonWorking";
 import Working from "./Working/Working";
 import PaymentForm from "./PaymentForm/PaymentForm";
+import Register from "./Register/Register";
 import Success from "./Success/Success";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -28,6 +29,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<Working />} />
           <Route path="/addworking" element={<AddWorking />} />
           <Route path="/comparisonworking" element={<ComparisonWorking />} />

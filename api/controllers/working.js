@@ -20,20 +20,11 @@ const createWorking = async (req, res, next) => {
     name,
     duration,
   });
+
   try {
     await newWorks.save();
 
     res.status(201).json("Post process successful");
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
-
-const getWorking = async (req, res, next) => {
-  try {
-    const works = await Works.find();
-
-    res.status(200).json(works);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -164,7 +155,6 @@ const comparisonWorking = async (req, res, next) => {
 };
 
 module.exports = {
-  getWorking,
   createWorking,
   searchWorking,
   comparisonWorking,

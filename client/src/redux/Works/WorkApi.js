@@ -10,7 +10,10 @@ export const searchWorks = async (dispatch, date) => {
   try {
     const { data } = await axios.get(`${API_URL}/api/searchWorks/${date}`);
     dispatch(getCurrentWorks(data));
+
+    console.log(data)
   } catch (error) {
+    console.log(error);
     const { data } = error.response;
     dispatch(showAlert(data));
   }

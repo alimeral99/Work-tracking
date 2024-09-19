@@ -1,0 +1,48 @@
+.register {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  height: 100vh;
+}
+
+.register > form {
+  width: 40%;
+  margin-top: 25px;
+  height: fit-content;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 15px;
+  border: 1px solid lightgray;
+  color: #242424;
+}
+
+form > .form-group {
+  margin-top: 10px;
+}
+
+form > .form-group > label {
+  display: block;
+  font-size: large;
+  font-weight: 500;
+}
+
+form > .form-group > input {
+  width: 90%;
+  height: 35px;
+  padding: 5px;
+  border: 1px solid lightgray;
+}
+
+.register-buttonContainer {
+  width: 90%;
+  text-align: right;
+}
+
+.formGroup-button {
+  background-color: #242424;
+  margin-top: 10px;
+  width: 30%;
+  height: 30px;
+  color: white;
+  cursor: pointer;
+}
