@@ -1,52 +1,35 @@
 import React, { useState, useEffect } from "react";
-import "./Register.css";
-import { register } from "../redux/User/userApi";
-import { reset } from "../redux/User/UserSlice";
+import { login } from "../redux/User/userApi";
 
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import Alert from "@mui/material/Alert";
 
-function Register() {
-  const [username, setUsername] = useState("");
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { error, successRedirect } = useSelector((state) => state.user);
+  const { error, currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(successRedirect);
-
   useEffect(() => {
-    if (successRedirect) {
-      navigate("/login");
+    if (currentUser) {
+      navigate("/");
     }
+  }, [currentUser]);
 
-    dispatch(reset());
-  }, [successRedirect]);
-
-  const handleSubmit = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-
-    register(dispatch, username, email, password);
+    login(dispatch, email, password);
   };
 
   return (
     <div className="register">
-      <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
+      <form onSubmit={handleLogin}>
+        <h2>Login</h2>
         {error && <Alert severity="error">{error}</Alert>}
-
-        <div className="form-group">
-          <label>Username</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-
         <div className="form-group">
           <label>Email</label>
           <input
@@ -76,4 +59,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

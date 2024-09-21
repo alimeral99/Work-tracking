@@ -5,30 +5,20 @@ const register = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    // Check if the user already exists
-    const existingUser = await User.findOne({ email });
+    let user = await User.findOne({ email });
 
-    if (existingUser) {
-      return res
-        .status(400)
-        .json({ message: "This email is already registered." });
-    }
+    if (user) return res.status(401).json("User already registered.");
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const hashedPassword = bcrypt.hashSync(password, 10);
 
-    // Create a new user
-    const newUser = new User({
-      username,
-      email,
-      password: hashedPassword,
-    });
+    user = new User({ username, email, password: hashedPassword });
+    await user.save();
 
-    await newUser.save();
+    user.password = null;
 
-    res.status(201).json({ message: "User successfully registered." });
+    res.status(201).json(user);
   } catch (error) {
-    res.status(500).json({ message: "Server error." });
+    next(error);
   }
 };
 
@@ -41,18 +31,19 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found." });
+      return res.status(404).json("User not found.");
     }
 
     // Compare the password
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Invalid password." });
+      return res.status(400).json("Invalid password.");
     }
 
-    res.status(200).json({ result: user });
+    user.password = null;
+    res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ message: "Server error." });
+    res.status(500).json("Server error.");
   }
 };
 

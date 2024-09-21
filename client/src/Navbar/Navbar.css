@@ -1,4 +1,7 @@
 .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 60px;
   padding: 10px;
   background-color: #ffffff;
@@ -9,4 +12,11 @@
 .navbar-logo {
   text-transform: uppercase;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.nav-links > .link {
+  font-size: 18px;
+  text-decoration: none;
+  color: #242424;
+  margin-right: 10px;
 }

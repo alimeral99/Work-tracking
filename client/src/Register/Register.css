@@ -36,13 +36,15 @@ form > .form-group > input {
 .register-buttonContainer {
   width: 90%;
   text-align: right;
+  background: none;
 }
 
 .formGroup-button {
   background-color: #242424;
   margin-top: 10px;
-  width: 30%;
+  width: 35%;
   height: 30px;
   color: white;
   cursor: pointer;
+  border: none;
 }
