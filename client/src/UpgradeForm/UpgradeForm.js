@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import "./UpgradeForm.css";
 import axios from "axios";
 
+import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
@@ -8,7 +10,9 @@ const stripePromise = loadStripe(
 );
 
 function PaymentForm() {
-  const [email, setEmail] = useState("");
+  const { currentUser } = useSelector((state) => state.user);
+
+  const [email, setEmail] = useState(currentUser.email);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,21 +37,18 @@ function PaymentForm() {
   };
 
   return (
-    <div>
+    <div className="upgrade-form">
       <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="text"
-          />
-        </div>
+        <h2>Upgrade</h2>
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+        />
 
-        <div>
-          <input id="quantity" type="number" />
-        </div>
-
-        <button type="submit">Ödeme Yap</button>
+        <button className="upgradeButton" type="submit">
+          Click to upgrade your acount
+        </button>
       </form>
     </div>
   );

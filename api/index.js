@@ -1,11 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
 var cors = require("cors");
+const http = require("http");
+const { Server } = require("socket.io");
+
 require("dotenv").config();
 
 const { handlerwebHook } = require("./controllers/stripe");
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
+app.io = io;
 
 app.use((req, res, next) => {
   if (req.originalUrl === "/api/webhook") {
@@ -46,7 +57,11 @@ mongoose
     console.log(err);
   });
 
-app.listen(
+io.on("connection", (socket) => {
+  socket.emit("test", { test: "test" });
+});
+
+server.listen(
   process.env.PORT,
   console.log(`Server running on port ${process.env.PORT} `)
 );

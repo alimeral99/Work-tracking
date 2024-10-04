@@ -23,10 +23,22 @@ const userSlice = createSlice({
     setRedirect: (state) => {
       state.successRedirect = true;
     },
+    setUpgradetoUserPremium: (state, action) => {
+      state.currentUser = action.payload;
+    },
+    logout(state) {
+      state.currentUser = null;
+    },
   },
 });
 
-export const { registerSuccess, registerFailure, setRedirect, reset } =
-  userSlice.actions;
+export const {
+  registerSuccess,
+  registerFailure,
+  setRedirect,
+  reset,
+  logout,
+  setUpgradetoUserPremium,
+} = userSlice.actions;
 
 export default userSlice.reducer;

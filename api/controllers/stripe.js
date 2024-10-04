@@ -9,8 +9,8 @@ const makingPayment = async (req, res) => {
     payment_method_types: ["card"],
     mode: "payment",
     customer_email: email, // Müşteri e-posta bilgisi
-    success_url: "http://localhost:3000/success",
-    cancel_url: "http://localhost:3000/cancel",
+    success_url: "http://localhost:3000",
+    cancel_url: "http://localhost:3000",
     line_items: [
       {
         price_data: {
@@ -48,7 +48,11 @@ const handlerwebHook = async (req, res) => {
 
     // Call the function to upgrade the user to premium
     try {
-      await upgradeUserToPremium(customerEmail);
+      const premiumUser = await upgradeUserToPremium(customerEmail);
+
+      req.app.io.on("connection", (socket) => {
+        socket.emit("premiumUser", premiumUser);
+      });
     } catch (error) {
       console.error("Failed to upgrade user to premium:", error);
       return res.status(500).send("Failed to upgrade user.");
@@ -66,9 +70,12 @@ async function upgradeUserToPremium(email) {
     if (user) {
       // Update the user's role to premium
       user.role = "premium";
-      await user.save(); // Save the changes
-
+      // Save the changes
+      const premiumUser = await user.save();
+      premiumUser.password = null;
       console.log(`User ${email} has been upgraded to premium!`);
+
+      return premiumUser;
     } else {
       console.log(`User not found: ${email}`);
       throw new Error("User not found");
