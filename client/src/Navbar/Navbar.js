@@ -20,7 +20,7 @@ function Navbar() {
       <h1 className="navbar-logo">Work Tracking </h1>
       <div className="nav-links">
         {currentUser ? (
-          <Link onClick={handleLogout} className="link">
+          <Link to={"/login"} onClick={handleLogout} className="link">
             Logout
           </Link>
         ) : (

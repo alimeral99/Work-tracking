@@ -1,0 +1,24 @@
+.links {
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  width: 35px;
+  background-color: #ffff;
+  border: 1px solid lightgray;
+  cursor: pointer;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #242424;
+}
+
+.link-icon {
+  font-size: 20px;
+}
+
+.working-links {
+  display: flex;
+}

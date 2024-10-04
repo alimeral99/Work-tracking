@@ -25,8 +25,6 @@ export const login = async (dispatch, email, password) => {
     });
 
     dispatch(registerSuccess(response.data));
-
-    localStorage.setItem("user", response.data);
   } catch ({ response }) {
     const { data } = response;
     console.log(data);

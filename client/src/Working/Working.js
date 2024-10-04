@@ -2,40 +2,12 @@ import React from "react";
 import "./Working.css";
 import WorkingList from "./WorkingList/WorkingList";
 import SearchWorking from "./SearchWorking/SearchWorking";
-
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { IoMdAdd } from "react-icons/io";
-import { MdOutlineCompareArrows } from "react-icons/md";
-import { MdOutlineWorkspacePremium } from "react-icons/md";
-
-import { GiUpgrade } from "react-icons/gi";
+import WorkingLinks from "./WorkingLinks/WorkingLinks";
 
 function Working() {
-  const { currentUser } = useSelector((state) => state.user);
-
   return (
     <div className="working">
-      <div className="working-links">
-        <Link to={"/addworking"} className={"link-styles links"}>
-          <IoMdAdd className="link-icon" />
-        </Link>
-
-        <Link to={"/comparisonworking"} className={"link-styles links"}>
-          <MdOutlineCompareArrows className="link-icon" />
-        </Link>
-
-        {currentUser.role === "premium" ? (
-          <Link className={"link-styles links"}>
-            <MdOutlineWorkspacePremium className="link-icon" />
-          </Link>
-        ) : (
-          <Link to={"/upgradeform"} className={"link-styles links"}>
-            <GiUpgrade className="link-icon" />
-          </Link>
-        )}
-      </div>
-
+      <WorkingLinks />
       <SearchWorking />
       <WorkingList />
     </div>

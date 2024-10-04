@@ -3,7 +3,7 @@ import "./Register.css";
 import { register } from "../redux/User/userApi";
 import { reset } from "../redux/User/UserSlice";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Alert from "@mui/material/Alert";
 
@@ -15,8 +15,6 @@ function Register() {
   const { error, successRedirect } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  console.log(successRedirect);
 
   useEffect(() => {
     if (successRedirect) {

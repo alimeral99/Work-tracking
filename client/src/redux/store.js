@@ -19,6 +19,10 @@ export const store = configureStore({
     comparisonWorks: comparisonWorksReducer,
     user: persistedReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export const persistor = persistStore(store);
