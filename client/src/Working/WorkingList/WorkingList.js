@@ -22,7 +22,6 @@ function WorkingList() {
   const [date, setDate] = useState(new Date());
 
   const { currentWorks, alert } = useSelector((state) => state.works);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

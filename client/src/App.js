@@ -14,6 +14,7 @@ import { reset } from "./redux/Works/WorksSlice";
 import { setUpgradetoUserPremium } from "./redux/User/UserSlice";
 
 import socketIO from "socket.io-client";
+import PrivateComponent from "./PrivateComponent";
 
 function App() {
   const { isSuccess } = useSelector((state) => state.works);
@@ -46,11 +47,14 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Working />} />
-          <Route path="/addworking" element={<AddWorking />} />
-          <Route path="/comparisonworking" element={<ComparisonWorking />} />
-          <Route path="/upgradeform" element={<UpgradeForm />} />
           <Route path="/login" element={<Login />} />
+
+          <Route element={<PrivateComponent />}>
+            <Route path="/" element={<Working />} />
+            <Route path="/addworking" element={<AddWorking />} />
+            <Route path="/comparisonworking" element={<ComparisonWorking />} />
+            <Route path="/upgradeform" element={<UpgradeForm />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
