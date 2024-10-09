@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const WorksSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
   name: {
     type: String,
     required: true,

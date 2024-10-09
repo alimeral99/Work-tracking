@@ -6,12 +6,20 @@ import {
 } from "./ComparisonWorkSlice";
 import API_URL from "./api";
 
-export const searchWorks = async (dispatch, date) => {
+export const searchWorks = async (dispatch, date, token) => {
   try {
-    const { data } = await axios.get(`${API_URL}/api/searchWorks/${date}`);
-    dispatch(getCurrentWorks(data));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-    console.log(data)
+    console.log(token);
+    const { data } = await axios.get(
+      `${API_URL}/api/searchWorks/${date}`,
+      config
+    );
+    dispatch(getCurrentWorks(data));
   } catch (error) {
     console.log(error);
     const { data } = error.response;
@@ -19,9 +27,19 @@ export const searchWorks = async (dispatch, date) => {
   }
 };
 
-export const createWorks = async (dispatch, createContent) => {
+export const createWorks = async (dispatch, createContent, token) => {
   try {
-    const response = await axios.post(`${API_URL}/api/addworks`, createContent);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = await axios.post(
+      `${API_URL}/api/addworks`,
+      createContent,
+      config
+    );
 
     dispatch(getCurrentWorks());
   } catch (error) {
@@ -30,9 +48,18 @@ export const createWorks = async (dispatch, createContent) => {
   }
 };
 
-export const comparisonWorks = async (dispatch, name) => {
+export const comparisonWorks = async (dispatch, name, token) => {
   try {
-    const { data } = await axios.post(`${API_URL}/api/comparisonWorks/${name}`);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      `${API_URL}/api/comparisonWorks/${name}`,
+      config
+    );
     dispatch(setComparisonWorks(data));
   } catch (error) {
     const { data } = error.response;

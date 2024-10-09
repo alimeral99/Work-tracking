@@ -9,6 +9,10 @@ export const comparisonWorksSlice = createSlice({
   name: "comparisonWorks",
   initialState,
   reducers: {
+    reset: (state) => {
+      state.comparedWorks = null;
+      state.comparisonAlert = null;
+    },
     setComparisonWorks: (state, action) => {
       state.comparedWorks = action.payload;
       state.comparisonAlert = null;
@@ -20,7 +24,7 @@ export const comparisonWorksSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setComparisonWorks, setShowComparisonAlert } =
+export const { setComparisonWorks, setShowComparisonAlert, reset } =
   comparisonWorksSlice.actions;
 
 export default comparisonWorksSlice.reducer;

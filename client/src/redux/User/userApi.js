@@ -24,7 +24,9 @@ export const login = async (dispatch, email, password) => {
       password,
     });
 
-    dispatch(registerSuccess(response.data));
+    const { user } = response.data;
+
+    dispatch(registerSuccess(user));
   } catch ({ response }) {
     const { data } = response;
     console.log(data);

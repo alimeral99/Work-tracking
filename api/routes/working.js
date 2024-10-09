@@ -7,9 +7,11 @@ const {
   comparisonWorking,
 } = require("../controllers/working");
 
-router.get("/searchWorks/:query", searchWorking);
+const { authenticateJWT } = require("../utils/authMiddleWare");
 
-router.post("/addWorks", createWorking);
-router.post("/comparisonWorks/:query", comparisonWorking);
+router.get("/searchWorks/:query", authenticateJWT, searchWorking);
+router.get("/comparisonWorks/:query", authenticateJWT, comparisonWorking);
+
+router.post("/addWorks", authenticateJWT, createWorking);
 
 module.exports = router;

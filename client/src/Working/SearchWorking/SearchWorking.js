@@ -14,6 +14,8 @@ function SearchWorking() {
   const [date, setDate] = useState(new Date());
   const [isMonthPicker, setIsMonthPicker] = useState(false);
 
+  const { currentUser } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   const handleSearch = async (e) => {
@@ -21,9 +23,9 @@ function SearchWorking() {
 
     if (isMonthPicker) {
       const monthDate = format(date, "yyyy-MM");
-      searchWorks(dispatch, monthDate);
+      searchWorks(dispatch, monthDate, currentUser.token);
     } else {
-      searchWorks(dispatch, date);
+      searchWorks(dispatch, date, currentUser.token);
     }
 
     dispatch(reset());

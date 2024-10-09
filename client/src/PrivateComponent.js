@@ -6,8 +6,6 @@ import { useSelector } from "react-redux";
 function PrivateComponent() {
   const { currentUser } = useSelector((state) => state.user);
 
-  console.log(currentUser);
-
   return currentUser ? <Outlet /> : <Navigate to="/register" />;
 }
 

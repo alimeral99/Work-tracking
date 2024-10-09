@@ -16,6 +16,7 @@ function AddWorking() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { error, isSuccess } = useSelector((state) => state.works);
+  const { currentUser } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function AddWorking() {
       duration,
     };
 
-    createWorks(dispatch, createContent);
+    createWorks(dispatch, createContent, currentUser.token);
   };
 
   return (

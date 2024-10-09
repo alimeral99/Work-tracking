@@ -19,6 +19,7 @@ const createWorking = async (req, res, next) => {
     date: new Date(date).toISOString(),
     name,
     duration,
+    userId: req.user.id,
   });
 
   try {
@@ -30,7 +31,7 @@ const createWorking = async (req, res, next) => {
   }
 };
 
-const searchWorking = async (req, res, next) => {
+const searchWorking = async (req, res) => {
   const date = req.params.query;
 
   if (!date) {
@@ -38,7 +39,6 @@ const searchWorking = async (req, res, next) => {
   }
 
   let results;
-
   //If the incoming request is the month
   if (date.length === 7) {
     const [year, month] = date.split("-");
@@ -46,6 +46,7 @@ const searchWorking = async (req, res, next) => {
     results = await Works.aggregate([
       {
         $match: {
+          userId: req.user._id,
           date: {
             $gte: new Date(year, month - 1, 1),
             $lt: new Date(year, month, 1),
@@ -77,6 +78,7 @@ const searchWorking = async (req, res, next) => {
     const endOfDay = new Date(searchAllDate.setHours(23, 59, 59, 999));
 
     results = await Works.find({
+      userId: req.user._id,
       date: {
         $gte: startOfDay,
         $lte: endOfDay,
@@ -91,7 +93,7 @@ const searchWorking = async (req, res, next) => {
   res.status(200).json(results);
 };
 
-const comparisonWorking = async (req, res, next) => {
+const comparisonWorking = async (req, res) => {
   const name = req.params.query;
 
   if (!name) {
@@ -101,6 +103,8 @@ const comparisonWorking = async (req, res, next) => {
   const results = await Works.aggregate([
     {
       $match: {
+        userId: req.user._id,
+
         name: name,
       },
     },
@@ -144,7 +148,6 @@ const comparisonWorking = async (req, res, next) => {
       },
     },
   ]);
-
   if (results.length === 0) {
     return res.status(404).json("No works found for the given name.");
   }

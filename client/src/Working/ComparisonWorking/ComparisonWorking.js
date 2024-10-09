@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ComparisonWorking.css";
 import { comparisonWorks } from "../../redux/Works/WorkApi";
+import { reset } from "../../redux/Works/ComparisonWorkSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Alert } from "@mui/material";
@@ -20,11 +21,17 @@ function ComparisonWorking() {
   const { comparedWorks, comparisonAlert } = useSelector(
     (state) => state.comparisonWorks
   );
-
+  const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    return () => {
+      dispatch(reset());
+    };
+  }, [dispatch]);
+
   const handleComparisonWorks = () => {
-    comparisonWorks(dispatch, name);
+    comparisonWorks(dispatch, name, currentUser.token);
   };
 
   return (
