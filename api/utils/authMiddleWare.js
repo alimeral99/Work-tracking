@@ -17,7 +17,6 @@ const authenticateJWT = async (req, res, next) => {
 
       // Get user from the token
       req.user = await User.findById(decoded.id).select("-password");
-      console.log(req.user);
       next();
     } catch (error) {
       return res.status(401).json("Not authorized");

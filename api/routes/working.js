@@ -8,9 +8,15 @@ const {
 } = require("../controllers/working");
 
 const { authenticateJWT } = require("../utils/authMiddleWare");
+const { checkPremiumUser } = require("../utils/checkPremiumUser");
 
 router.get("/searchWorks/:query", authenticateJWT, searchWorking);
-router.get("/comparisonWorks/:query", authenticateJWT, comparisonWorking);
+router.get(
+  "/comparisonWorks/:query",
+  authenticateJWT,
+  checkPremiumUser,
+  comparisonWorking
+);
 
 router.post("/addWorks", authenticateJWT, createWorking);
 

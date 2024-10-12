@@ -22,10 +22,12 @@ function WorkingList() {
   const [date, setDate] = useState(new Date());
 
   const { currentWorks, alert } = useSelector((state) => state.works);
+  const { currentUser } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    searchWorks(dispatch, date);
+    searchWorks(dispatch, date, currentUser.token);
   }, [dispatch]);
 
   const rows = currentWorks?.map((work) =>

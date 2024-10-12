@@ -29,7 +29,6 @@ export const login = async (dispatch, email, password) => {
     dispatch(registerSuccess(user));
   } catch ({ response }) {
     const { data } = response;
-    console.log(data);
     dispatch(registerFailure(data));
   }
 };

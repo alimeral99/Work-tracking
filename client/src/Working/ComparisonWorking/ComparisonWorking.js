@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ComparisonWorking.css";
+import AlertModal from "./AlertModal";
+
 import { comparisonWorks } from "../../redux/Works/WorkApi";
 import { reset } from "../../redux/Works/ComparisonWorkSlice";
 
@@ -17,11 +19,13 @@ import {
 
 function ComparisonWorking() {
   const [name, setName] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { comparedWorks, comparisonAlert } = useSelector(
     (state) => state.comparisonWorks
   );
   const { currentUser } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,21 +34,38 @@ function ComparisonWorking() {
     };
   }, [dispatch]);
 
-  const handleComparisonWorks = () => {
+  const handleOpenModal = () => {
+    if (currentUser.role !== "premium") {
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleComparisonWorks = (e) => {
+    e.preventDefault();
     comparisonWorks(dispatch, name, currentUser.token);
   };
 
   return (
     <div className="comparison-working">
-      <div className="select-container">
-        <label>enter your work name</label>
+      {isModalOpen && <AlertModal onClose={handleCloseModal} />}
+
+      <form onSubmit={handleComparisonWorks} className="select-container">
+        <label>Click enter your work name</label>
+
         <input
+          onFocus={handleOpenModal}
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
+          disabled={currentUser.role !== "premium" && name.length > 0}
         />
-        <button onClick={handleComparisonWorks}>Search</button>
-      </div>
+
+        <button disabled={currentUser.role !== "premium"}>Search</button>
+      </form>
       {comparisonAlert ? (
         <Alert severity="info">{comparisonAlert}</Alert>
       ) : comparedWorks ? (

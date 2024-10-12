@@ -14,7 +14,6 @@ export const searchWorks = async (dispatch, date, token) => {
       },
     };
 
-    console.log(token);
     const { data } = await axios.get(
       `${API_URL}/api/searchWorks/${date}`,
       config
@@ -56,6 +55,7 @@ export const comparisonWorks = async (dispatch, name, token) => {
       },
     };
 
+    console.log(token);
     const { data } = await axios.get(
       `${API_URL}/api/comparisonWorks/${name}`,
       config
@@ -63,6 +63,7 @@ export const comparisonWorks = async (dispatch, name, token) => {
     dispatch(setComparisonWorks(data));
   } catch (error) {
     const { data } = error.response;
+    console.log(data);
     dispatch(setShowComparisonAlert(data));
   }
 };

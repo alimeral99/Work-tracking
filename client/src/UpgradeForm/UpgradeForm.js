@@ -12,6 +12,8 @@ const stripePromise = loadStripe(
 function PaymentForm() {
   const { currentUser } = useSelector((state) => state.user);
 
+  console.log(currentUser);
+
   const [email, setEmail] = useState(currentUser.email);
 
   const handleSubmit = async (e) => {
