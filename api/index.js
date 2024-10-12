@@ -65,3 +65,11 @@ server.listen(
   process.env.PORT,
   console.log(`Server running on port ${process.env.PORT} `)
 );
+
+app.use((error, req, res, next) => {
+  const errorResponse = {
+    statusCode: error.statusCode || 500,
+    message: error.message || "Something went wrong!",
+  };
+  return res.status(errorResponse.statusCode).json(errorResponse.message);
+});

@@ -1,14 +1,15 @@
 const User = require("../models/user");
+const { errorHandler } = require("../utils/error");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   try {
     let user = await User.findOne({ email });
 
-    if (user) return res.status(401).json("User already registered.");
+    if (user) return next(errorHandler(401, "User already registered."));
 
     const hashedPassword = bcrypt.hashSync(password, 10);
 
@@ -24,7 +25,7 @@ const register = async (req, res) => {
 };
 
 // User login (Login)
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
@@ -32,13 +33,13 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json("User not found.");
+      return next(errorHandler(404, "User not found."));
     }
 
     // Compare the password
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
-      return res.status(400).json("Invalid password.");
+      return next(errorHandler(400, "Invalid password."));
     }
 
     user.password = null;
@@ -63,7 +64,7 @@ const login = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(500).json("Server error.");
+    next(error);
   }
 };
 
