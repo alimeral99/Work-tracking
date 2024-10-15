@@ -9,13 +9,14 @@
   
   ![Demo Photo](https://github.com/alimeral99/Work-Tracking/blob/master/uploads/image5.PNG)
 
-   # Tools
+   # Features
   - Register and login operations can be implemented.
   - Daily works can be added.
   - Works can be tracked daily or monthly.
   - Premium membership can be obtained with the Stripe payment system.
   - As a premium member, the new features of the application can be used.
   - As a premium member, works can be compared on a monthly basis.
+  - Authorization has been implemented with JWT (JSON Web Token)
     
 
   # Tools
