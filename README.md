@@ -9,6 +9,15 @@
   
   ![Demo Photo](https://github.com/alimeral99/Work-Tracking/blob/master/uploads/image5.PNG)
 
+   # Tools
+  - Register and login operations can be implemented.
+  - Daily works can be added.
+  - Works can be tracked daily or monthly.
+  - Premium membership can be obtained with the Stripe payment system.
+  - As a premium member, the new features of the application can be used.
+  - As a premium member, works can be compared on a monthly basis.
+    
+
   # Tools
   - Html
   - Css
@@ -35,7 +44,24 @@
    STRIPE_ENDPOİNT_KEY=your stripe endpoint key
    JWT_SECRET = 'abc123'
    ```
+
+### Install Dependencies (frontend & backend)
+   ```
+    cd client
+    npm install
+    npm start
+
+    cd api
+    npm install
+    npm start
+   ```
+
+  ```
+  Sample User Logins
+  muhammet@gmail.com.com 
+  123456
+  ```
    
-     `
+     
 
 
