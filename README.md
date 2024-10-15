@@ -27,13 +27,15 @@
   - Socket-io
   - Mongo DB
 
-  ### Env Variables
-    ```
-     PORT=500
-     DB_URL = your mongodb uri
-     STRIPE_SECRET_KEY= your stripe secret key
-     STRIPE_ENDPOİNT_KEY=your stripe endpoint key
-     JWT_SECRET = 'abc123'
-     ```
+### Env Variables
+   ```
+   PORT=500
+   DB_URL = your mongodb uri
+   STRIPE_SECRET_KEY= your stripe secret key
+   STRIPE_ENDPOİNT_KEY=your stripe endpoint key
+   JWT_SECRET = 'abc123'
+   ```
+   
+     `
 
 
