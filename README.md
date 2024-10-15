@@ -58,7 +58,7 @@
 
   ```
   Sample User Logins
-  muhammet@gmail.com.com 
+  muhammet@gmail.com
   123456
   ```
    
