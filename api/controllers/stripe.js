@@ -11,8 +11,8 @@ const makingPayment = async (req, res) => {
       payment_method_types: ["card"],
       mode: "payment",
       customer_email: email, // Müşteri e-posta bilgisi
-      success_url: "http://localhost:3000",
-      cancel_url: "http://localhost:3000",
+      success_url: "https://work-tracking.onrender.com/",
+      cancel_url: "https://work-tracking.onrender.com/",
       line_items: [
         {
           price_data: {
