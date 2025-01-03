@@ -20,7 +20,7 @@ function App() {
   const { isSuccess } = useSelector((state) => state.works);
 
   const dispatch = useDispatch();
-  const socket = socketIO.connect("http://localhost:5000");
+  const socket = socketIO.connect("https://work-tracking-backend-ws89.onrender.com");
 
   useEffect(() => {
     socket.on("premiumUser", (premiumUser) => {
