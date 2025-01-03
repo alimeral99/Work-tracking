@@ -21,7 +21,7 @@ function PaymentForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/stripe/payment",
+        "https://work-tracking-backend-ws89.onrender.com/stripe/payment",
         { email }
       );
 
