@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "*",
+    origin: ""https://work-tracking-backend-ws89.onrender.com",
     credentials: true,
     methods: "PATCH,DELETE,POST,GET",
   })
