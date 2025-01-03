@@ -1,3 +1,3 @@
-const API_URL = "https://work-tracking-backend-ws89.onrender.com";
+const API_URL = "https://work-tracking-backend-s6xt.onrender.com";
 
 export default API_URL;
