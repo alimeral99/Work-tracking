@@ -12,7 +12,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ""https://work-tracking-backend-ws89.onrender.com",
+    origin: "https://work-tracking.onrender.com",
     methods: ["GET", "POST"],
   },
 });
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ""https://work-tracking-backend-ws89.onrender.com",
+    origin: "https://work-tracking.onrender.com",
     credentials: true,
     methods: "PATCH,DELETE,POST,GET",
   })
