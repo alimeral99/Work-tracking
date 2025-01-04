@@ -24,6 +24,7 @@ function PaymentForm() {
         "https://work-tracking-backend-s6xt.onrender.com/stripe/payment",
         { email }
       );
+      console.log(response)
 
       const session = response.data; // Backend'den dönen checkout session bilgileri
       const stripe = await stripePromise;
