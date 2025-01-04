@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
-  "pk_live_51PyCWbGHtt8ecPGjVbllxqnflJ7raGR9DJ2CGv8yuuY0XE3YoThPfMQxnpFIldp82KQ176EznRrkjbaDXqPuDEan00WB0HfUbK"
+  "pk_test_51PyCWbGHtt8ecPGjVbllxqnflJ7raGR9DJ2CGv8yuuY0XE3YoThPfMQxnpFIldp82KQ176EznRrkjbaDXqPuDEan00WB0HfUbK"
 );
 
 function PaymentForm() {
